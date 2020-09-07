@@ -23,5 +23,12 @@ namespace LogiNext_Converter
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            LogiNextParser.ParseLogiNextCSV(@"C:\Users\10287407\Documents\Temp\tests\OrderReport_2020_09_05_08_45_46.csv");
+
+
+        }
     }
 }
