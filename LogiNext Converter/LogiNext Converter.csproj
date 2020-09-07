@@ -53,6 +53,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="LogiNextDriver.cs" />
     <Compile Include="LogiNextParser.cs" />
     <Compile Include="LogiNextTransaction.cs" />
     <Compile Include="ReaderCSV.cs" />
