@@ -42,14 +42,14 @@ namespace LogiNext_Converter
         {
             DataRow dr = dtSummary.NewRow();
             dr["Driver"] = DriverName;
-            dr["Cash"] = cash;
-            dr["Card"] = card;
-            dr["Online"] = online;
-            dr["COD Other"] = totalOtherCOD;
-            dr["Total"] = totalDelivered;
-            dr["Order Count"] = orderCount;
-            dr["Non Delivered - Order Count"] = orderCountOther;
-            dr["Non Delivered - Total Amount"] = totalOther;
+            dr["Cash"] = cash.ToString("F2");
+            dr["Card"] = card.ToString("F2");
+            dr["Online"] = online.ToString("F2");
+            dr["COD Other"] = totalOtherCOD.ToString("F2");
+            dr["Total"] = totalDelivered.ToString("F2");
+            dr["Order Count"] = orderCount.ToString("F0");
+            dr["ND - Order Count"] = orderCountOther.ToString("F0");
+            dr["ND - Total"] = totalOther.ToString("F2");
             dtSummary.Rows.Add(dr);
         }
 
