@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -19,6 +20,10 @@ namespace LogiNext_Converter
     /// </summary>
     public partial class MainWindow : Window
     {
+        LogiNextDriverSummary lnSummary = new LogiNextDriverSummary();
+
+        //todo remove
+        DataTable tempTable = new DataTable();
         public MainWindow()
         {
             InitializeComponent();
@@ -26,8 +31,13 @@ namespace LogiNext_Converter
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            LogiNextParser.ParseLogiNextCSV(@"C:\Users\10287407\Documents\Temp\tests\OrderReport_2020_09_05_08_45_46.csv");
+            LogiNextParser lnp = new LogiNextParser();
+            lnSummary = lnp.ParseLogiNextCSV(@"C:\Users\10287407\Documents\Temp\tests\OrderReport_2020_09_05_08_45_46.csv");
 
+            tempTable = lnSummary.GetSummaryTable();
+            
+            dgSummary.ItemsSource = tempTable.DefaultView;
+            return;
 
         }
     }

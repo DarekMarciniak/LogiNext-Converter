@@ -5,9 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LogiNext_Converter"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="LogiNext Converter" Height="577.05" Width="848" WindowState="Maximized">
     <Grid Height="420" Margin="0,0,-0.4,0" VerticalAlignment="Bottom">
-        <Button Content="Button" HorizontalAlignment="Left" Margin="305,148,0,0" VerticalAlignment="Top" Width="125" Height="50" Click="Button_Click"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="10,360,0,0" VerticalAlignment="Top" Width="125" Height="50" Click="Button_Click"/>
+        <DataGrid x:Name="dgSummary" Margin="10,-105,11,75" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch">
+            <DataGrid.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0.333"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </DataGrid.RenderTransform>
+        </DataGrid>
 
     </Grid>
 </Window>

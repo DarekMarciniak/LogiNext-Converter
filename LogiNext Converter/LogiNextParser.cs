@@ -6,20 +6,22 @@ using System.Text.RegularExpressions;
 
 namespace LogiNext_Converter
 {
-    public static class LogiNextParser
+    public class LogiNextParser
     {
         
         //private static List<string> fileContents;
 
-        public static void ParseLogiNextCSV(string filePath)
+        public LogiNextDriverSummary ParseLogiNextCSV(string filePath)
         {
+            LogiNextDriverSummary lnDriverSummary = new LogiNextDriverSummary();
+
             Regex csvParserRegex = new Regex(",(?=(?:[^\"]*\"[^\"]*\")*(?![^\"]*\"))");
             
             List<string> fileContents = ReaderCSV.GetFileContents(filePath);
 
             //TODO - refactor
             List<LogiNextTransaction> tempTransactions = new List<LogiNextTransaction>();
-            Dictionary<string, LogiNextDriver> driverDict = new Dictionary<string, LogiNextDriver>();
+            
 
             foreach (string csvLine in fileContents)
             {
@@ -29,16 +31,10 @@ namespace LogiNext_Converter
 
             foreach (LogiNextTransaction transaction in tempTransactions)
             {
-                if (!driverDict.ContainsKey(transaction.Driver))
-                {
-                    LogiNextDriver newDriver = new LogiNextDriver(transaction.Driver);
-                    driverDict.Add(newDriver.DriverName, newDriver);
-                }
-
-                driverDict[transaction.Driver].AddTransaction(transaction);
+                lnDriverSummary.AddDriverTransaction(transaction);
             }
 
-            return;
+            return lnDriverSummary;
         }
     }
 }

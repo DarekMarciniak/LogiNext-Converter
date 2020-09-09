@@ -14,13 +14,16 @@ namespace LogiNext_Converter
         public string PaymentType;  
         public decimal ActualCashAtDelivery;
         public decimal PlannedCashAtDelivery;
+        public decimal OrderValue;
         public string PaymentSubType;
         public string TransactionID;
         public string Driver;
         public string TripNumber;
+        public string DriverID;
 
         private string actualCashAtDeliveryParsed;
         private string plannedCashAtDeliveryParsed;
+        private string orderValueParsed;
 
         private Dictionary<string, int> indexDictionary;
 
@@ -35,17 +38,23 @@ namespace LogiNext_Converter
             PaymentType = NormalizeFieldValue(csvLineFields[indexDictionary["PaymentType"]]);
             actualCashAtDeliveryParsed = NormalizeFieldValue(csvLineFields[indexDictionary["ActualCashAtDelivery"]]);
             plannedCashAtDeliveryParsed = NormalizeFieldValue(csvLineFields[indexDictionary["PlannedCashAtDelivery"]]);
+            orderValueParsed = NormalizeFieldValue(csvLineFields[indexDictionary["OrderValue"]]);
             PaymentSubType = NormalizeFieldValue(csvLineFields[indexDictionary["PaymentSubType"]]);
             TransactionID = NormalizeFieldValue(csvLineFields[indexDictionary["TransactionID"]]);
             Driver = NormalizeFieldValue(csvLineFields[indexDictionary["Driver"]]);
+            DriverID = NormalizeFieldValue(csvLineFields[indexDictionary["DriverID"]]);
             TripNumber = NormalizeFieldValue(csvLineFields[indexDictionary["TripNumber"]]);
+
+            if (PaymentType.Equals("COD", StringComparison.InvariantCultureIgnoreCase) &&  (!PaymentSubType.Equals( "CASH", StringComparison.InvariantCultureIgnoreCase)
+                && !PaymentSubType.Equals("CARD_MANUAL", StringComparison.InvariantCultureIgnoreCase))) PaymentSubType = "COD OTHER";
 
             if (actualCashAtDeliveryParsed == "" || actualCashAtDeliveryParsed == "-") actualCashAtDeliveryParsed = "0";
             if (plannedCashAtDeliveryParsed == "" || plannedCashAtDeliveryParsed == "-") plannedCashAtDeliveryParsed = "0";
-            if (PaymentSubType == "" || PaymentSubType == "-") PaymentSubType = "NO SUB-TYPE";
-
+            if (orderValueParsed == "" || orderValueParsed == "-") orderValueParsed = "0";
+         
             ActualCashAtDelivery = Convert.ToDecimal(actualCashAtDeliveryParsed, System.Globalization.CultureInfo.InvariantCulture);
             PlannedCashAtDelivery = Convert.ToDecimal(plannedCashAtDeliveryParsed, System.Globalization.CultureInfo.InvariantCulture);
+            OrderValue = Convert.ToDecimal(orderValueParsed, System.Globalization.CultureInfo.InvariantCulture);
 
         }
 
@@ -72,11 +81,13 @@ namespace LogiNext_Converter
             indexDictionary.Add("OrderStatus", 27);
             indexDictionary.Add("OrderDate", 13);
             indexDictionary.Add("PaymentType", 16);
+            indexDictionary.Add("OrderValue", 17);
             indexDictionary.Add("PlannedCashAtDelivery", 20);
             indexDictionary.Add("ActualCashAtDelivery", 21);
             indexDictionary.Add("PaymentSubType", 22);
             indexDictionary.Add("TransactionID", 23);
             indexDictionary.Add("Driver", 30);
+            indexDictionary.Add("DriverID", 30);
             indexDictionary.Add("TripNumber", 34);
         }
     }
