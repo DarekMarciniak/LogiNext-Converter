@@ -11,9 +11,28 @@ namespace LogiNext_Converter
     {
         private Dictionary<string, LogiNextDriver> driverDict = new Dictionary<string, LogiNextDriver>();
         private DataTable dtSummary;
-        //TODO REMOVE
-        public List<LogiNextDriver> DriverList = new List<LogiNextDriver>();
-        
+ 
+        public List<LogiNextDriver> DriverList { get { return driverList; } }
+        private List<LogiNextDriver> driverList = new List<LogiNextDriver>();
+
+        private decimal cashTotal;
+        private decimal cardTotal;
+        private decimal onlineTotal;
+        private decimal otherCodTotal;
+        private decimal totalCODDelivered;
+        private int orderCountTotal;
+        private decimal otherTotal;
+        private int otherOrderCountTotal;
+
+        public decimal Cash { get { return cashTotal; } }
+        public decimal Card { get { return cardTotal; } }
+        public decimal Online { get { return onlineTotal; } }
+        public decimal OtherCOD { get { return otherCodTotal; } }
+        public decimal TotalCOD { get { return totalCODDelivered; } }
+        public int OrderCount { get { return orderCountTotal; } }
+        public decimal Other { get { return otherTotal; } }
+        public int OtherOrderCount { get { return otherOrderCountTotal; } }
+
         public LogiNextDriverSummary()
         {
             DataTableProvider dtp = new DataTableProvider();
@@ -24,12 +43,24 @@ namespace LogiNext_Converter
         {
             if (!driverDict.ContainsKey(transaction.DriverID))
             {
-                LogiNextDriver newDriver = new LogiNextDriver(transaction.DriverID, transaction.Driver);
+                LogiNextDriver newDriver = new LogiNextDriver(transaction.DriverID, transaction.DriverName);
                 driverDict.Add(newDriver.DriverID, newDriver);
-                DriverList.Add(newDriver);
+                driverList.Add(newDriver);
             }
 
-            driverDict[transaction.Driver].AddTransaction(transaction);
+            driverDict[transaction.DriverName].AddTransaction(transaction);
+        }
+
+        private void AddToTotals(LogiNextDriver driver)
+        {
+            cashTotal += driver.Cash;
+            cardTotal += driver.Card;
+            onlineTotal += driver.Online;
+            otherCodTotal += driver.TotalOtherCOD;
+            totalCODDelivered += driver.TotalDelivered;
+            orderCountTotal += driver.OrderCount;
+            otherOrderCountTotal += driver.OrderCountOther;
+            otherTotal += driver.TotalOther;
         }
 
         public DataTable GetSummaryTable()

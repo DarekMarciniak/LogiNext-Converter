@@ -11,25 +11,33 @@ namespace LogiNext_Converter
         private static List<string> fileContents;
         public static List<string> GetFileContents(string filePath)
         {
-            fileContents = new List<string>();
+            try
+            { 
+                fileContents = new List<string>();
 
-            using (StreamReader sr = new StreamReader(filePath))
-            {
-                string currentLine;
-                int lineCounter = 0;
-
-                while ((currentLine = sr.ReadLine()) != null)
+                using (StreamReader sr = new StreamReader(filePath))
                 {
-                    if (lineCounter > 0)
+                    string currentLine;
+                    int lineCounter = 0;
+
+                    while ((currentLine = sr.ReadLine()) != null)
                     {
-                        fileContents.Add(currentLine);
+                        if (lineCounter > 0)
+                        {
+                            fileContents.Add(currentLine);
+                        }
+
+                        lineCounter++;
                     }
-
-                    lineCounter++;
                 }
-            }
 
-            return fileContents;
+                return fileContents;
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show("Error: " + ex.Message, "Exception", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+                return fileContents;
+            }
 
         }
 

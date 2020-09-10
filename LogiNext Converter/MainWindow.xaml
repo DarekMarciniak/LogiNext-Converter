@@ -31,6 +31,11 @@
                 <DataGridTextColumn Binding="{Binding TotalOther, StringFormat=\{0:0.00\}}" ClipboardContentBinding="{x:Null}" FontFamily="Verdana" Header="ND - Total Amount" IsReadOnly="True" Width="70"/>
                 <DataGridTextColumn Binding="{Binding OrderCountOther}" ClipboardContentBinding="{x:Null}" FontFamily="Verdana" Header="ND - Orders" IsReadOnly="True" Width="70"/>
             </DataGrid.Columns>
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <EventSetter Event="MouseLeftButtonUp" Handler="DgSummary_MouseDown"/>
+                </Style>
+            </DataGrid.RowStyle>
             <DataGrid.ColumnHeaderStyle>
                 <Style TargetType="{x:Type DataGridColumnHeader}">
                     <Setter Property="ContentTemplate">
@@ -54,14 +59,15 @@
         <DataGrid x:Name="dgTransactions" Margin="7,9.4,7,46.2" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" ColumnHeaderHeight="40" FontFamily="Verdana" CanUserAddRows="False" CanUserSortColumns="False" AutoGenerateColumns="False" Grid.Row="1">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding DriverName}" ClipboardContentBinding="{x:Null}" CanUserSort="True" Header="Driver Name" IsReadOnly="True" FontFamily="Verdana"/>
-                <DataGridTextColumn Binding="{Binding Cash, StringFormat=\{0:0.00\}}" ClipboardContentBinding="{x:Null}" FontFamily="Verdana" Header="Cash" IsReadOnly="True" Width="70"/>
-                <DataGridTextColumn Binding="{Binding Card, StringFormat=\{0:0.00\}}" ClipboardContentBinding="{x:Null}" FontFamily="Verdana" Header="Card" IsReadOnly="True" Width="70"/>
-                <DataGridTextColumn Binding="{Binding Online, StringFormat=\{0:0.00\}}" ClipboardContentBinding="{x:Null}" FontFamily="Verdana" Header="Online" IsReadOnly="True" Width="70"/>
-                <DataGridTextColumn Binding="{Binding TotalOtherCOD, StringFormat=\{0:0.00\}}" ClipboardContentBinding="{x:Null}" FontFamily="Verdana" Header="COD Other" IsReadOnly="True" Width="70"/>
-                <DataGridTextColumn Binding="{Binding TotalDelivered, StringFormat=\{0:0.00\}}" ClipboardContentBinding="{x:Null}" FontFamily="Verdana" Header="Total" IsReadOnly="True" Width="70"/>
-                <DataGridTextColumn Binding="{Binding OrderCount}" ClipboardContentBinding="{x:Null}" FontFamily="Verdana" Header="Orders" IsReadOnly="True" Width="70"/>
-                <DataGridTextColumn Binding="{Binding TotalOther, StringFormat=\{0:0.00\}}" ClipboardContentBinding="{x:Null}" FontFamily="Verdana" Header="ND - Total Amount" IsReadOnly="True" Width="70"/>
-                <DataGridTextColumn Binding="{Binding OrderCountOther}" ClipboardContentBinding="{x:Null}" FontFamily="Verdana" Header="ND - Orders" IsReadOnly="True" Width="70"/>
+                <DataGridTextColumn Binding="{Binding OrderNumber}" ClipboardContentBinding="{x:Null}" FontFamily="Verdana" Header="Order Number" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Destination}" ClipboardContentBinding="{x:Null}" FontFamily="Verdana" Header="Destiation" IsReadOnly="True" Width="350"/>
+                <DataGridTextColumn Binding="{Binding OrderStatus}" ClipboardContentBinding="{x:Null}" FontFamily="Verdana" Header="Order Status" IsReadOnly="True" />
+                <DataGridTextColumn Binding="{Binding OrderDate}" ClipboardContentBinding="{x:Null}" FontFamily="Verdana" Header="Order Date" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding PaymentType}" ClipboardContentBinding="{x:Null}" FontFamily="Verdana" Header="Payment Type" IsReadOnly="True" />
+                <DataGridTextColumn Binding="{Binding PaymentSubType}" ClipboardContentBinding="{x:Null}" FontFamily="Verdana" Header="Payment Subtype" IsReadOnly="True" />
+                <DataGridTextColumn Binding="{Binding OrderValue, StringFormat=\{0:0.00\}}" ClipboardContentBinding="{x:Null}" FontFamily="Verdana" Header="Order Value" IsReadOnly="True" Width="100"/>
+                <DataGridTextColumn Binding="{Binding PlannedCashAtDelivery, StringFormat=\{0:0.00\}}" ClipboardContentBinding="{x:Null}" FontFamily="Verdana" Header="Planned At Delivery" IsReadOnly="True" Width="100"/>
+                <DataGridTextColumn Binding="{Binding ActualCashAtDelivery, StringFormat=\{0:0.00\}}" ClipboardContentBinding="{x:Null}" FontFamily="Verdana" Header="Actual At Delivery" IsReadOnly="True" Width="100"/>
             </DataGrid.Columns>
             <DataGrid.ColumnHeaderStyle>
                 <Style TargetType="{x:Type DataGridColumnHeader}">

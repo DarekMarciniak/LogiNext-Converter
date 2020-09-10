@@ -8,18 +8,18 @@ namespace LogiNext_Converter
     public class LogiNextTransaction
     {
         public string OrderNumber { get; }
-        public string Destination;
-        public string OrderStatus;
-        public string OrderDate;
-        public string PaymentType;  
-        public decimal ActualCashAtDelivery;
-        public decimal PlannedCashAtDelivery;
-        public decimal OrderValue;
-        public string PaymentSubType;
-        public string TransactionID;
-        public string Driver;
-        public string TripNumber;
-        public string DriverID;
+        public string Destination { get; }
+        public string OrderStatus { get; }
+        public string OrderDate { get; }
+        public string PaymentType { get; }
+        public decimal ActualCashAtDelivery { get; }
+        public decimal PlannedCashAtDelivery { get; }
+        public decimal OrderValue { get; }
+        public string PaymentSubType { get; }
+        public string TransactionID { get; }
+        public string DriverName { get; }
+        public string TripNumber { get; }
+        public string DriverID { get; }
 
         private string actualCashAtDeliveryParsed;
         private string plannedCashAtDeliveryParsed;
@@ -41,7 +41,7 @@ namespace LogiNext_Converter
             orderValueParsed = NormalizeFieldValue(csvLineFields[indexDictionary["OrderValue"]]);
             PaymentSubType = NormalizeFieldValue(csvLineFields[indexDictionary["PaymentSubType"]]);
             TransactionID = NormalizeFieldValue(csvLineFields[indexDictionary["TransactionID"]]);
-            Driver = NormalizeFieldValue(csvLineFields[indexDictionary["Driver"]]);
+            DriverName = NormalizeFieldValue(csvLineFields[indexDictionary["Driver"]]);
             DriverID = NormalizeFieldValue(csvLineFields[indexDictionary["DriverID"]]);
             TripNumber = NormalizeFieldValue(csvLineFields[indexDictionary["TripNumber"]]);
 

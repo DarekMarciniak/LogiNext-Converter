@@ -17,8 +17,7 @@ namespace LogiNext_Converter
         public int OrderCount { get { return orderCount; } }
         public int OrderCountOther { get { return orderCountOther; } }
         public decimal TotalOther { get { return totalOther; } }
-
-        public decimal TotalOtherCOD {  get { return totalOtherCOD; } }
+        public decimal TotalOtherCOD { get { return totalOtherCOD; } }
 
         private decimal cash;
         private decimal card;
@@ -29,6 +28,7 @@ namespace LogiNext_Converter
         private decimal totalOther;
         private decimal totalOtherCOD;
 
+        public List<LogiNextTransaction> Transactions {get { return transactionList; } }
         private List<LogiNextTransaction> transactionList;
 
         public LogiNextDriver(string driverID, string driverName)
@@ -86,6 +86,11 @@ namespace LogiNext_Converter
                 orderCountOther++;
             }
 
+        }
+
+        public string ToString()
+        {
+            return DriverName;
         }
 
     }

@@ -23,8 +23,6 @@ namespace LogiNext_Converter
     {
         LogiNextDriverSummary lnSummary = new LogiNextDriverSummary();
 
-        //todo remove
-        DataTable tempTable = new DataTable();
         public MainWindow()
         {
             InitializeComponent();
@@ -32,26 +30,63 @@ namespace LogiNext_Converter
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            string filePath = @"C:\Users\10287407\Documents\Temp\tests\OrderReport_2020_08_20_08_05_38.csv";  //Todo fix FileDialogs.OpenFileDialog();
-            if (filePath == string.Empty) return;
+            try
+            {
+                string filePath = FileDialogs.OpenFileDialog();
+                if (filePath == string.Empty) return;
 
-            Task<bool>[] tasks = new Task<bool>[1];
+                dgSummary.ItemsSource = null;
+                dgTransactions.ItemsSource = null;
 
-            tasks[0] = Task.Factory.StartNew(() => ParseCSV(filePath));
-            Task.WaitAll(tasks);
-            dgSummary.ItemsSource = lnSummary.DriverList; //tempTable.DefaultView;
+                Task<bool>[] tasks = new Task<bool>[1];
 
+                tasks[0] = Task.Factory.StartNew(() => ParseCSV(filePath));
+                Task.WaitAll(tasks);
+                dgSummary.ItemsSource = lnSummary.DriverList;
+                dgTransactions.ItemsSource = null;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private bool ParseCSV(string filePath)
         {
-            LogiNextParser lnp = new LogiNextParser();
-            lnSummary = lnp.ParseLogiNextCSV(filePath);
+            try
+            {
+                LogiNextParser lnp = new LogiNextParser();
+                lnSummary = lnp.ParseLogiNextCSV(filePath);
 
-            tempTable = lnSummary.GetSummaryTable();
-            return true;
-            
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+        }
 
+        private void DgSummary_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                DataGridRow dr = (DataGridRow)sender;
+                if (dr == null)
+                {
+                    e.Handled = true;
+                    return;
+                }
+
+                LogiNextDriver lnd = (LogiNextDriver)dr.Item;
+
+                dgTransactions.ItemsSource = lnd.Transactions;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+  
         }
     }
 }
