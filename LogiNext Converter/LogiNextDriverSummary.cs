@@ -10,7 +10,7 @@ namespace LogiNext_Converter
     public class LogiNextDriverSummary
     {
         private Dictionary<string, LogiNextDriver> driverDict = new Dictionary<string, LogiNextDriver>();
-        private DataTable dtSummary;
+        //private DataTable dtSummary;
  
         public List<LogiNextDriver> DriverList { get { return driverList; } }
         private List<LogiNextDriver> driverList = new List<LogiNextDriver>();
@@ -35,8 +35,8 @@ namespace LogiNext_Converter
 
         public LogiNextDriverSummary()
         {
-            DataTableProvider dtp = new DataTableProvider();
-            dtSummary = dtp.SummaryDataTable;
+            //DataTableProvider dtp = new DataTableProvider();
+            //dtSummary = dtp.SummaryDataTable;
 
         }
         public void AddDriverTransaction(LogiNextTransaction transaction)
@@ -49,6 +49,7 @@ namespace LogiNext_Converter
             }
 
             driverDict[transaction.DriverName].AddTransaction(transaction);
+  
         }
 
         private void AddToTotals(LogiNextDriver driver)
@@ -63,15 +64,25 @@ namespace LogiNext_Converter
             otherTotal += driver.TotalOther;
         }
 
-        public DataTable GetSummaryTable()
+        public void AddTotal()
         {
-            foreach (LogiNextDriver driver in driverDict.Values)
+            foreach (LogiNextDriver driver in driverList)
             {
-                Debug.WriteLine(driver.DriverName);
-                driver.AddDriverDataRow(dtSummary);
+                AddToTotals(driver);
             }
-
-            return dtSummary;
+            LogiNextDriver totalDriver = new LogiNextDriver(cashTotal, cardTotal, onlineTotal, totalCODDelivered, orderCountTotal, otherOrderCountTotal, otherTotal, otherCodTotal);
+            driverList.Add(totalDriver);
         }
+
+        //public DataTable GetSummaryTable()
+        //{
+        //    foreach (LogiNextDriver driver in driverDict.Values)
+        //    {
+        //        Debug.WriteLine(driver.DriverName);
+        //        driver.AddDriverDataRow(dtSummary);
+        //    }
+
+        //    return dtSummary;
+        //}
     }
 }

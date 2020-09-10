@@ -33,7 +33,7 @@ namespace LogiNext_Converter
             {
                 lnDriverSummary.AddDriverTransaction(transaction);
             }
-
+            
             return lnDriverSummary;
         }
     }

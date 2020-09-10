@@ -42,6 +42,8 @@ namespace LogiNext_Converter
 
                 tasks[0] = Task.Factory.StartNew(() => ParseCSV(filePath));
                 Task.WaitAll(tasks);
+
+                lnSummary.AddTotal();
                 dgSummary.ItemsSource = lnSummary.DriverList;
                 dgTransactions.ItemsSource = null;
             }
@@ -57,7 +59,7 @@ namespace LogiNext_Converter
             {
                 LogiNextParser lnp = new LogiNextParser();
                 lnSummary = lnp.ParseLogiNextCSV(filePath);
-
+                
                 return true;
             }
             catch (Exception ex)
@@ -79,7 +81,6 @@ namespace LogiNext_Converter
                 }
 
                 LogiNextDriver lnd = (LogiNextDriver)dr.Item;
-
                 dgTransactions.ItemsSource = lnd.Transactions;
             }
             catch (Exception ex)
@@ -87,6 +88,15 @@ namespace LogiNext_Converter
                 MessageBox.Show("Error: " + ex.Message, "Exception", MessageBoxButton.OK, MessageBoxImage.Error);
             }
   
+        }
+
+        private void DgSummary_LoadingRow(object sender, DataGridRowEventArgs e)
+        {
+            int index = dgSummary.Items.IndexOf(e.Row.DataContext);
+            if (index == dgSummary.Items.Count -1)
+            {
+                e.Row.FontWeight = FontWeights.Bold;
+            }
         }
     }
 }

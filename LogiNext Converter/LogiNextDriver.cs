@@ -38,6 +38,20 @@ namespace LogiNext_Converter
             transactionList = new List<LogiNextTransaction>();
         }
 
+        public LogiNextDriver(decimal cash, decimal card, decimal online, decimal totalDelivered, int orderCount, int orderCountOther, decimal totalOther, decimal totalOtherCOD)
+        {
+            //used to create Total in the driver summary;
+            this.DriverName = "Total";
+            this.cash = cash;
+            this.card = card;
+            this.online = online;
+            this.totalDelivered = totalDelivered;
+            this.orderCount = orderCount;
+            this.orderCountOther = orderCountOther;
+            this.totalOther = totalOther;
+            this.totalOtherCOD = totalOtherCOD;
+        }
+
         public void AddDriverDataRow(DataTable dtSummary)
         {
             DataRow dr = dtSummary.NewRow();
