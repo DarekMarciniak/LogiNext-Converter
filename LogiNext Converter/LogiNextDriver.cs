@@ -14,8 +14,8 @@ namespace LogiNext_Converter
         public decimal Card { get { return card; } }
         public decimal Online { get { return online; } }
         public decimal TotalDelivered { get { return totalDelivered; } }
-        public decimal OrderCount { get { return orderCount; } }
-        public decimal OrderCountOther { get { return orderCountOther; } }
+        public int OrderCount { get { return orderCount; } }
+        public int OrderCountOther { get { return orderCountOther; } }
         public decimal TotalOther { get { return totalOther; } }
 
         public decimal TotalOtherCOD {  get { return totalOtherCOD; } }
@@ -24,8 +24,8 @@ namespace LogiNext_Converter
         private decimal card;
         private decimal online;
         private decimal totalDelivered;
-        private decimal orderCount;
-        private decimal orderCountOther;
+        private int orderCount;
+        private int orderCountOther;
         private decimal totalOther;
         private decimal totalOtherCOD;
 

@@ -32,14 +32,14 @@ namespace LogiNext_Converter
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            string filePath = FileDialogs.OpenFileDialog();
+            string filePath = @"C:\Users\10287407\Documents\Temp\tests\OrderReport_2020_08_20_08_05_38.csv";  //Todo fix FileDialogs.OpenFileDialog();
             if (filePath == string.Empty) return;
 
             Task<bool>[] tasks = new Task<bool>[1];
 
             tasks[0] = Task.Factory.StartNew(() => ParseCSV(filePath));
             Task.WaitAll(tasks);
-            dgSummary.ItemsSource = tempTable.DefaultView;
+            dgSummary.ItemsSource = lnSummary.DriverList; //tempTable.DefaultView;
 
         }
 
