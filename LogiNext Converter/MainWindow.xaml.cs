@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Threading.Tasks;
 
 namespace LogiNext_Converter
 {
@@ -31,13 +32,25 @@ namespace LogiNext_Converter
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            string filePath = FileDialogs.OpenFileDialog();
+            if (filePath == string.Empty) return;
+
+            Task<bool>[] tasks = new Task<bool>[1];
+
+            tasks[0] = Task.Factory.StartNew(() => ParseCSV(filePath));
+            Task.WaitAll(tasks);
+            dgSummary.ItemsSource = tempTable.DefaultView;
+
+        }
+
+        private bool ParseCSV(string filePath)
+        {
             LogiNextParser lnp = new LogiNextParser();
-            lnSummary = lnp.ParseLogiNextCSV(@"C:\Users\10287407\Documents\Temp\tests\OrderReport_2020_09_05_08_45_46.csv");
+            lnSummary = lnp.ParseLogiNextCSV(filePath);
 
             tempTable = lnSummary.GetSummaryTable();
+            return true;
             
-            dgSummary.ItemsSource = tempTable.DefaultView;
-            return;
 
         }
     }

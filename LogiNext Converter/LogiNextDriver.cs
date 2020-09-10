@@ -48,6 +48,7 @@ namespace LogiNext_Converter
             dr["COD Other"] = totalOtherCOD.ToString("F2");
             dr["Total"] = totalDelivered.ToString("F2");
             dr["Order Count"] = orderCount.ToString("F0");
+            dr["  -  "] = " ";
             dr["ND - Order Count"] = orderCountOther.ToString("F0");
             dr["ND - Total"] = totalOther.ToString("F2");
             dtSummary.Rows.Add(dr);
@@ -76,12 +77,12 @@ namespace LogiNext_Converter
                     online += newTransaction.OrderValue;
                 }
 
-                totalDelivered += newTransaction.PlannedCashAtDelivery;
+                totalDelivered += newTransaction.OrderValue;
                 orderCount++;
             }
             else
             {
-                totalOther += newTransaction.PlannedCashAtDelivery;
+                totalOther += newTransaction.OrderValue;
                 orderCountOther++;
             }
 

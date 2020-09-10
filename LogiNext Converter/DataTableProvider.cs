@@ -27,8 +27,9 @@ namespace LogiNext_Converter
             dtSummary.Columns.Add("COD Other", typeof(decimal));
             dtSummary.Columns.Add("Total", typeof(decimal));
             dtSummary.Columns.Add("Order Count", typeof(decimal));
-            dtSummary.Columns.Add("ND - Order Count", typeof(decimal));
+            dtSummary.Columns.Add("  -  ", typeof(string));
             dtSummary.Columns.Add("ND - Total", typeof(decimal));
+            dtSummary.Columns.Add("ND - Order Count", typeof(decimal));
 
         }
     }

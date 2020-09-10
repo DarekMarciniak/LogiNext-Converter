@@ -54,6 +54,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DataTableProvider.cs" />
+    <Compile Include="FileDialogs.cs" />
     <Compile Include="LogiNextDriver.cs" />
     <Compile Include="LogiNextDriverSummary.cs" />
     <Compile Include="LogiNextParser.cs" />

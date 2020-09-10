@@ -10,8 +10,22 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="381*"/>
         </Grid.ColumnDefinitions>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="10,455,0,0" VerticalAlignment="Bottom" Width="125" Height="50" Click="Button_Click"/>
-        <DataGrid x:Name="dgSummary" Margin="7,8,7,58" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" ColumnHeaderHeight="40">
+        <Button x:Name="btnImport"  HorizontalAlignment="Left" Margin="10,455,0,0" VerticalAlignment="Bottom" Width="125" Height="50" Click="Button_Click" FontFamily="Verdana" HorizontalContentAlignment="Center">
+            <TextBlock Text="Import LogiNext CSV" TextAlignment="Center"
+               TextWrapping="Wrap"/>
+        </Button>
+        <DataGrid x:Name="dgSummary" Margin="7,8,7,58" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" ColumnHeaderHeight="40" FontFamily="Verdana" CanUserAddRows="False">
+            <DataGrid.ColumnHeaderStyle>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="ContentTemplate">
+                        <Setter.Value>
+                            <DataTemplate>
+                                <TextBlock TextWrapping="Wrap" Text="{Binding}"></TextBlock>
+                            </DataTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </DataGrid.ColumnHeaderStyle>
             <DataGrid.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
