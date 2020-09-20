@@ -43,7 +43,7 @@ namespace LogiNext_Converter
                 tasks[0] = Task.Factory.StartNew(() => ParseCSV(filePath));
                 Task.WaitAll(tasks);
 
-                lnSummary.AddTotal();
+                lnSummary.CalculateTotals();
                 dgSummary.ItemsSource = lnSummary.DriverList;
                 dgTransactions.ItemsSource = null;
             }

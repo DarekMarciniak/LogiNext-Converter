@@ -8,8 +8,6 @@ namespace LogiNext_Converter
 {
     public class LogiNextParser
     {
-        
-        //private static List<string> fileContents;
 
         public LogiNextDriverSummary ParseLogiNextCSV(string filePath)
         {
@@ -19,7 +17,6 @@ namespace LogiNext_Converter
             
             List<string> fileContents = ReaderCSV.GetFileContents(filePath);
 
-            //TODO - refactor
             List<LogiNextTransaction> tempTransactions = new List<LogiNextTransaction>();
             
 
@@ -31,7 +28,7 @@ namespace LogiNext_Converter
 
             foreach (LogiNextTransaction transaction in tempTransactions)
             {
-                lnDriverSummary.AddDriverTransaction(transaction);
+                lnDriverSummary.AddTransaction(transaction);
             }
             
             return lnDriverSummary;

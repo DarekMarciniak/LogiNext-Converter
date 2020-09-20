@@ -52,22 +52,6 @@ namespace LogiNext_Converter
             this.totalOtherCOD = totalOtherCOD;
         }
 
-        public void AddDriverDataRow(DataTable dtSummary)
-        {
-            DataRow dr = dtSummary.NewRow();
-            dr["Driver"] = DriverName;
-            dr["Cash"] = cash.ToString("F2");
-            dr["Card"] = card.ToString("F2");
-            dr["Online"] = online.ToString("F2");
-            dr["COD Other"] = totalOtherCOD.ToString("F2");
-            dr["Total"] = totalDelivered.ToString("F2");
-            dr["Order Count"] = orderCount.ToString("F0");
-            dr["  -  "] = " ";
-            dr["ND - Order Count"] = orderCountOther.ToString("F0");
-            dr["ND - Total"] = totalOther.ToString("F2");
-            dtSummary.Rows.Add(dr);
-        }
-
         public void AddTransaction(LogiNextTransaction newTransaction)
         {
             transactionList.Add(newTransaction);

@@ -10,8 +10,9 @@ namespace LogiNext_Converter
     public class LogiNextDriverSummary
     {
         private Dictionary<string, LogiNextDriver> driverDict = new Dictionary<string, LogiNextDriver>();
+        public Dictionary<string, LogiNextDriver> DriverDict = new Dictionary<string, LogiNextDriver>();
         //private DataTable dtSummary;
- 
+
         public List<LogiNextDriver> DriverList { get { return driverList; } }
         private List<LogiNextDriver> driverList = new List<LogiNextDriver>();
 
@@ -35,11 +36,9 @@ namespace LogiNext_Converter
 
         public LogiNextDriverSummary()
         {
-            //DataTableProvider dtp = new DataTableProvider();
-            //dtSummary = dtp.SummaryDataTable;
 
         }
-        public void AddDriverTransaction(LogiNextTransaction transaction)
+        public void AddTransaction(LogiNextTransaction transaction)
         {
             if (!driverDict.ContainsKey(transaction.DriverID))
             {
@@ -64,7 +63,7 @@ namespace LogiNext_Converter
             otherTotal += driver.TotalOther;
         }
 
-        public void AddTotal()
+        public void CalculateTotals()
         {
             foreach (LogiNextDriver driver in driverList)
             {
@@ -74,15 +73,5 @@ namespace LogiNext_Converter
             driverList.Add(totalDriver);
         }
 
-        //public DataTable GetSummaryTable()
-        //{
-        //    foreach (LogiNextDriver driver in driverDict.Values)
-        //    {
-        //        Debug.WriteLine(driver.DriverName);
-        //        driver.AddDriverDataRow(dtSummary);
-        //    }
-
-        //    return dtSummary;
-        //}
     }
 }
