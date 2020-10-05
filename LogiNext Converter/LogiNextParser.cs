@@ -15,15 +15,15 @@ namespace LogiNext_Converter
 
             Regex csvParserRegex = new Regex(",(?=(?:[^\"]*\"[^\"]*\")*(?![^\"]*\"))");
             
-            List<string> fileContents = ReaderCSV.GetFileContents(filePath);
+            List<string[]> fileContents = ReaderCSV.GetFileContents(filePath);
 
             List<LogiNextTransaction> tempTransactions = new List<LogiNextTransaction>();
             
 
-            foreach (string csvLine in fileContents)
+            foreach (string[] csvLine in fileContents)
             {
-                string[] csvFields = csvParserRegex.Split(csvLine);
-                tempTransactions.Add(new LogiNextTransaction(csvFields));
+                //string[] csvFields = csvParserRegex.Split(csvLine);
+                tempTransactions.Add(new LogiNextTransaction(csvLine));
             }
 
             foreach (LogiNextTransaction transaction in tempTransactions)
